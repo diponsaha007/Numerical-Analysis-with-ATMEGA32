@@ -3,14 +3,15 @@
 //#include <avr/pgmspace.h> 
 #include <avr/interrupt.h>
 #include <util/delay.h>
-#define RS    PA1  
-#define E     PA3  
+#define RS    PC0  
+#define E     PC4  
 #define CS1    PC3  
 #define CS2    PC2
 #define RST    PC1
 
 #define DATA   PORTD
-
+//PA1 PC0
+//PA3 PC4
 
 void Delay1();
 void InitLCD();
@@ -183,8 +184,8 @@ void Delay1()
 void InitLCD()
 {
     DDRD = 0xFF;
- DDRA |=(1<<RS);
- DDRA |=(1<<E);
+ DDRC |=(1<<RS);
+ DDRC |=(1<<E);
  DDRC |=(1<<CS1);
  DDRC |=(1<<CS2);
  DDRC |=(1<<RST);
@@ -194,7 +195,7 @@ void InitLCD()
  PORTC |= (1<<RST);   //Make sure rst state
  Delay1();
 
- PORTA &=~(1<<RS);  //Command mode
+ PORTC &=~(1<<RS);  //Command mode
     PORTC |= (1<<CS1);  //CS1 CS2 selected
     PORTC |= (1<<CS2);  //CS1 CS2 selected
  LCDout(0x3F);   //LCD on
@@ -212,8 +213,8 @@ void InitLCD()
 void Epulse()
 {
  //E=PA3
- PORTA = PORTA | 0x08;
- PORTA = PORTA & 0xF7;
+ PORTC = PORTC | 0x10;
+ PORTC = PORTC & 0xEF;
 }
 
 /*********************************************************************************/
@@ -238,7 +239,7 @@ y1=y; //+3
 
 if (x < 64)
 {
- PORTA &=~(1<<RS);  //Command mode
+ PORTC &=~(1<<RS);  //Command mode
     PORTC |= (1<<CS1);  //CS1 selected
  PORTC &=~(1<<CS2);
  c = c & 0x07;
@@ -249,7 +250,7 @@ if (x < 64)
 else
 {
  x = x - 64;
- PORTA &=~(1<<RS);  //Command mode
+ PORTC &=~(1<<RS);  //Command mode
  PORTC &=~(1<<CS1);  
     PORTC |= (1<<CS2);  //CS2 selected
  c = c & 0x07;
@@ -259,7 +260,7 @@ else
  x = x+64;
 }
  
- PORTA |= (1<<RS); 
+ PORTC |= (1<<RS); 
   if(color==1)
   {
   Pix [x][c]=(Pix [x][c]) | (1<<y1) ;  //y1 is having bit position to set
@@ -291,7 +292,7 @@ c=0;
   //=======================
    if ( x < 64)
    {
-    PORTA &=~(1<<RS);  //Command mode
+    PORTC &=~(1<<RS);  //Command mode
        PORTC |= (1<<CS1);  //CS1 selected
     PORTC &=~(1<<CS2);
     c = c & 0x07;
@@ -302,7 +303,7 @@ c=0;
    else
    {
     x = x - 64;
-    PORTA &=~(1<<RS);  //Command mode
+    PORTC &=~(1<<RS);  //Command mode
     PORTC &=~(1<<CS1);  
        PORTC |= (1<<CS2);  //CS2 selected
     c = c & 0x07;
@@ -311,7 +312,7 @@ c=0;
     LCDout(0x40 | x);  //C (x-axis) is having 3-bit address
     x = x+64;
    }
-   PORTA |=(1<<RS);
+   PORTC |=(1<<RS);
    LCDout(0x00);
   //=======================
    
