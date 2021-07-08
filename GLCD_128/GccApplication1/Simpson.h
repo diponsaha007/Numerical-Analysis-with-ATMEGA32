@@ -1,6 +1,6 @@
 double evaluate_function(char str[], double a)
 {
-	char s[100];
+	char s[30];
 	int idx = 0;
 	for(int i=0;str[i]!=0;i++)
 	{

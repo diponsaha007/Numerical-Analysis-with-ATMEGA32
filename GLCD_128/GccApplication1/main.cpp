@@ -6,6 +6,8 @@
 #include "parse.h"
 #include "Gauss.h"
 #include "Simpson.h"
+#include "extras.h"
+#include "graph_plot.h"
 
 
 void initial_page()
@@ -18,10 +20,11 @@ void initial_page()
 	DisplayText(1,24,s3);
 	char s4[] = "4.Integration";
 	DisplayText(1,36,s4);
+	char s5[]="5. Graph Plot";
+	DisplayText(1,48,s5);
 }
 
-char mat[4][4]={{'7','8','9','/'},{'4','5','6','*'},{'1','2','3','-'},{'C','0','=','+'}};
-char mat2[4][4][6]={{"sin(","cos(","tan(","sqrt("},{"^","x","y","<-"},{",",".","(",")"},{"C","C","C","C"}};
+
 
 char mode_selector()
 {
@@ -34,7 +37,7 @@ char mode_selector()
 			{
 				if(PINB&(1<<r))
 				{
-					if(mat[r][c-4]>='1' && mat[r][c-4]<='4')
+					if(mat[r][c-4]>='1' && mat[r][c-4]<='5')
 					{
 						_delay_ms(500);
 						return mat[r][c-4];
@@ -45,17 +48,6 @@ char mode_selector()
 			_delay_ms(10);
 		}
 	}
-}
-
-void append(char s[] , int len , char s2[])
-{
-	for(int i=0;s2[i]!=0;i++)
-	{
-		s[len] = s2[i];
-		len++;
-	}
-	s[len] = 0;
-	
 }
 
 
@@ -441,6 +433,8 @@ void newton_raphson()
 	//todo
 }
 
+
+
 void simpson()
 {
 	LCD_Clear();
@@ -595,6 +589,10 @@ int main(void)
 	else if(input=='4')
 	{
 		simpson();
+	}
+	else if(input=='5')
+	{
+		graph_plot();
 	}
 	
 }

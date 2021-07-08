@@ -40,7 +40,7 @@ enum types { DELIMITER = 1, VARIABLE, NUMBER, FUNCTION };
 const int NUMVARS = 10;
 struct parser {
     char *exp_ptr; // points to the expression
-    char token[30]; // holds current token
+    char token[15]; // holds current token
     char tok_type; // holds token's type
     double vars[NUMVARS]; // holds variable's values
     void eval_exp1(double &result);
@@ -52,7 +52,7 @@ struct parser {
     void get_token();
     parser();
     double eval_exp(char *exp);
-    char errormsg[30];
+    char errormsg[15];
 };
 // Parser constructor.
 parser::parser()
@@ -84,7 +84,7 @@ double parser::eval_exp(char *exp)
 void parser::eval_exp1(double &result)
 {
     int slot;
-    char temp_token[30];
+    char temp_token[15];
     if (tok_type == VARIABLE)
     {
         // save old token
@@ -180,7 +180,7 @@ void parser::eval_exp5(double &result)
 void parser::eval_exp6(double &result)
 {
     bool isfunc = (tok_type == FUNCTION);
-    char temp_token[30];
+    char temp_token[15];
     if (isfunc)
     {
         strcpy(temp_token, token);
@@ -195,17 +195,17 @@ void parser::eval_exp6(double &result)
         if (isfunc)
         {
             if (!strcmp(temp_token, "SIN"))
-                result = sin(PI / 180 * result);
+                result = sin(result);
             else if (!strcmp(temp_token, "COS"))
-                result = cos(PI / 180 * result);
+                result = cos(result);
             else if (!strcmp(temp_token, "TAN"))
-                result = tan(PI / 180 * result);
+                result = tan(result);
             else if (!strcmp(temp_token, "ASIN"))
-                result = 180 / PI*asin(result);
+                result = asin(result);
             else if (!strcmp(temp_token, "ACOS"))
-                result = 180 / PI*acos(result);
+                result = acos(result);
             else if (!strcmp(temp_token, "ATAN"))
-                result = 180 / PI*atan(result);
+                result = atan(result);
             else if (!strcmp(temp_token, "SINH"))
                 result = sinh(result);
             else if (!strcmp(temp_token, "COSH"))
