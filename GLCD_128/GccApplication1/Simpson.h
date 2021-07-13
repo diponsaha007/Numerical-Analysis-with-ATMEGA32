@@ -1,3 +1,4 @@
+parser ob;
 double evaluate_function(char str[], double a)
 {
 	char s[30];
@@ -20,7 +21,7 @@ double evaluate_function(char str[], double a)
 		}
 	}
 	s[idx] = 0;
-	parser ob;
+	
 	double ans=ob.eval_exp(s);
 	return ans;
 }

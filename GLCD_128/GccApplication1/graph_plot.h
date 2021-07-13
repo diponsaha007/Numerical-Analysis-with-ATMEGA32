@@ -86,15 +86,15 @@ void graph_plot()
 	show_and_get(F1,s1);
 	
 	char F2[]="minX = ";
-	char s2[6];
+	char s2[10];
 	show_and_get(F2,s2);
 	
 	char F3[]="maxX = ";
-	char s3[6];
+	char s3[10];
 	show_and_get(F3,s3);
 	
 	
-	const int T=15;
+	const int T=25;
 	
 	parser ob;
 	double l=ob.eval_exp(s2);
@@ -108,13 +108,11 @@ void graph_plot()
 		l=t;
 	}
 	
-	double save_x[T];
 	double save_y[T];
 	
 	int w=0;
 	for(double x=l;w<T;w++)
 	{
-		save_x[w]=x;
 		save_y[w]=evaluate_function(s1,x);
 		
 		
@@ -127,23 +125,23 @@ void graph_plot()
 		//_delay_ms(1000);
 		x+=(r-l)/(T-1);
 	}
-	
+	//l+i*(r-l)/(T-1)
 
 	
 	double mxX=0,mxY=0,mnX=0,mnY=0;
 	for(int i=0;i<T;i++)
 	{
-		if(save_x[i]>mxX) mxX=save_x[i];
+		if(l+i*(r-l)/(T-1)>mxX) mxX=l+i*(r-l)/(T-1);
 		if(save_y[i]>mxY) mxY=save_y[i];
 		
-		if(save_x[i]<mnX) mnX=save_x[i];
+		if(l+i*(r-l)/(T-1)<mnX) mnX=l+i*(r-l)/(T-1);
 		if(save_y[i]<mnY) mnY=save_y[i];	
 	}
 	for(int i=0;i<T;i++)
 	{
-		save_x[i]-=mnX;
 		save_y[i]-=mnY;
 	}
+	//((l+i*(r-l)/(T-1))-mnX)
 	double scaleX=120/(mxX-mnX);
 	double scaleY=60/(mxY-mnY);
 
@@ -151,12 +149,10 @@ void graph_plot()
 	_delay_ms(500);
 	
 	
-	int i_x[T];
-	int i_y[T];
 	for(int i=0;i<T;i++)
 	{
-		i_x[i]=round(save_x[i]*scaleX);
-		i_y[i]=63-round(save_y[i]*scaleY);
+		//i_x[i]=round(save_x[i]*scaleX);
+		//i_y[i]=63-round(save_y[i]*scaleY);
 	}
 	for(int y=0;y<64;y++)
 	{
@@ -172,7 +168,7 @@ void graph_plot()
 	for(int i=1;i<T;i++)
 	{
 		//PutPixel(i_x[i],i_y[i],1);
-		line(i_x[i-1],i_y[i-1],i_x[i],i_y[i],1);
+		line(round(((l+(i-1)*(r-l)/(T-1))-mnX)*scaleX),63-round(save_y[i-1]*scaleY),round(((l+i*(r-l)/(T-1))-mnX)*scaleX),63-round(save_y[i]*scaleY),1);
 		_delay_ms(50);
 	}
 
