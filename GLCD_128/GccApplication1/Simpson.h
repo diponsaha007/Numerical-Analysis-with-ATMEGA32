@@ -1,14 +1,14 @@
 parser ob;
 double evaluate_function(char str[], double a)
 {
-	char s[30];
+	char s[40];
 	int idx = 0;
 	for(int i=0;str[i]!=0;i++)
 	{
 		if(str[i]=='x')
 		{
-			char tmp[12];
-			dtostrf(a,1,3,tmp);
+			char tmp[15];
+			dtostrf(a,1,8,tmp);
 			for(int j=0;tmp[j]!=0;j++)
 			{
 				s[idx] = tmp[j];

@@ -153,13 +153,22 @@
     </ToolchainSettings>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="extras.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="Gauss.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="glcd.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="graph_plot.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="main.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Newton.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="parse.h">
