@@ -1,11 +1,15 @@
-int gauss_algo (int n, int m, double *ans , double **a)
+
+double ans[3];
+double a[3][4];
+int where[3];
+
+int gauss_algo (int n, int m)
 {
 	//returns 1 if a single solution
 	//returns 2 if infinite solution
 	//returns 0 if no solution
 	//returns a solution if there is at least one solution
-	const double EPS = 1e-7;
-	int *where = (int*)malloc(m * sizeof(int));
+	const double EPS = 1e-5;
 	for(int i=0; i<m; i++)
 		where[i] = -1;
 	for (int col=0, row=0; col<m && row<n; ++col)
@@ -49,11 +53,9 @@ int gauss_algo (int n, int m, double *ans , double **a)
 
 	for (int i=0; i<m; ++i){
 		if (where[i] == -1){
-			free(where);
 			return 2;
 		}
 	}
-	free(where);
 	return 1;
 }
 void gauss()
@@ -65,10 +67,6 @@ void gauss()
 	show_text(text1,1);
 	int n = int_number_input(24);
 	
-	double *ans = (double*)malloc(m * sizeof(double));
-	double ** a = (double**)malloc(n*sizeof(double *));
-	for(int i=0; i< n; i++)
-	a[i] = (double*) malloc((m+1)*sizeof(double));
 
 	
 	
@@ -104,7 +102,7 @@ void gauss()
 			a[i][m] = double_num_input(12);
 		}
 	}
-	int koto = gauss_algo(n,m,ans,a);
+	int koto = gauss_algo(n,m);
 	if(koto==0)
 	{
 		strcpy(text1,"No Solution!");
@@ -121,7 +119,7 @@ void gauss()
 		show_text(text1,1);
 		_delay_ms(1500);
 	}
-	
+	char s[20];
 	for(int i=0;i<m;i++)
 	{
 		char text[14] = "Ans x[";
@@ -132,7 +130,7 @@ void gauss()
 		ek[0] = ']';
 		strcat(text , ek);
 		show_text(text,1);
-		char s[50];
+		
 		dtostrf(ans[i],1,2,s);
 		show_text(s,12);
 		//wait for equal
@@ -165,9 +163,5 @@ void gauss()
 		}
 		_delay_ms(500);
 	}
-	for(int i = 0; i < n; i++)
-	free(a[i]);
-	free(a);
-
-	free(ans);
+	
 }

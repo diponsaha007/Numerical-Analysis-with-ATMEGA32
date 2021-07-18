@@ -7,7 +7,7 @@ double diffentiation(char str[],double x)
 double newton(char str[],double guess)
 {
 	double x = guess;
-	for (int rep = 0; rep<=80; rep++)
+	for (int rep = 0; rep<=40; rep++)
 	{
 		double nx = x - (evaluate_function(str, x)/diffentiation(str , x));
 		if(!isfinite(nx))
@@ -25,7 +25,7 @@ void newton_raphson()
 	char text2[] = "Input initial approximation:";
 	DisplayText(1,1,text1);
 	//input function
-	char s[50];
+	char s[20];
 	int len=0;
 	int where=12;
 	while (1)

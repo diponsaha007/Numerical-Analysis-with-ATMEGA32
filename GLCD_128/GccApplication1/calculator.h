@@ -1,7 +1,7 @@
 void calculator()
 {
 	LCD_Clear();
-	char s[50];
+	char s[20];
 	int len=0;
 	int where=1;
 	while (1)
@@ -32,7 +32,7 @@ void calculator()
 							LCD_Clear();
 							_delay_ms(100);
 							DisplayText(1,1,s);
-							break;
+							return;
 						}
 						s[len]=mat[r][c-4];
 						len+=1;

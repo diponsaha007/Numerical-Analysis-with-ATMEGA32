@@ -13,16 +13,11 @@
 
 void initial_page()
 {
-	char s[] = "1.Calculator";
-	DisplayText(1,1,s);
-	char s2[] = "2.Gauss Elimination";
-	DisplayText(1,12,s2);
-	char s3[] = "3.Newton Raphson";
-	DisplayText(1,24,s3);
-	char s4[] = "4.Integration";
-	DisplayText(1,36,s4);
-	char s5[]="5.Graph Plot";
-	DisplayText(1,48,s5);
+	DisplayText(1,1,"1.Calculator");
+	DisplayText(1,12,"2.Gauss Elimination");
+	DisplayText(1,24,"3.Newton Raphson");
+	DisplayText(1,36,"4.Integration");
+	DisplayText(1,48,"5.Graph Plot");
 }
 
 
@@ -57,32 +52,57 @@ char mode_selector()
 int main(void)
 {
 	InitLCD();
-	LCD_Clear();
-	initial_page();
+	
 	DDRB=0xFF;
 	DDRA=0xFF;
 	
-	//take input
-	char input = mode_selector();
-	if(input=='1')
-	{
-		calculator();	
-	}
-	else if(input=='2')
-	{
-		gauss();
-	}
-	else if(input=='3')
-	{
-		newton_raphson();
-	}
-	else if(input=='4')
-	{
-		simpson();
-	}
-	else if(input=='5')
-	{
-		graph_plot();
+	while(true){
+		LCD_Clear();
+		initial_page();
+		//take input
+		char input = mode_selector();
+		if(input=='1')
+		{
+			calculator();	
+		}
+		else if(input=='2')
+		{
+			gauss();
+		}
+		else if(input=='3')
+		{
+			newton_raphson();
+		}
+		else if(input=='4')
+		{
+			simpson();
+		}
+		else if(input=='5')
+		{
+			graph_plot();
+		}
+		
+		bool f=1;
+		while (f)
+		{
+			for(int c=4;c<8&&f;c++)
+			{
+				PORTB=1<<c;
+				for(int r=0;r<4&&f;r++)
+				{
+					if(PINB&(1<<r))
+					{
+						if(mat[r][c-4]=='C')
+						{
+							f=0;
+						}
+						_delay_ms(500);
+					}
+				}
+				_delay_ms(10);
+			}
+		}
+		
 	}
 	
 }

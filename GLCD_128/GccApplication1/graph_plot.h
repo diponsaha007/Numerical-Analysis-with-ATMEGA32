@@ -80,7 +80,7 @@ void show_and_get(char *F, char * s)
 
 void graph_plot()
 {
-	char F1[10]="F(x) = ";
+	char F1[]="F(x) = ";
 	char s1[10];
 	show_and_get(F1,s1);
 	
@@ -93,7 +93,7 @@ void graph_plot()
 	show_and_get(F1,s2);
 	double r=ob.eval_exp(s2);
 	
-	const int T=25;
+	const int T=12;
 
 	if(l>r)
 	{
