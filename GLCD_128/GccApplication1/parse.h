@@ -30,10 +30,9 @@ Last modified: Aug. 2016.
 #include <stdio.h>
 #include <stdlib.h>
 #include <ctype.h>
-#include <string.h>
 #include <math.h>
 
-#define PI 3.14159265358979323846
+#define PI 3.141592
 
 
 enum types { DELIMITER = 1, VARIABLE, NUMBER, FUNCTION };
@@ -111,7 +110,7 @@ void parser::eval_exp1(double &result)
 // Add or subtract two terms.
 void parser::eval_exp2(double &result)
 {
-    register char op;
+    char op;
     double temp;
     eval_exp3(result);
     while ((op = *token) == '+' || op == '-')
@@ -132,7 +131,7 @@ void parser::eval_exp2(double &result)
 // Multiply or divide two factors.
 void parser::eval_exp3(double &result)
 {
-    register char op;
+    char op;
     double temp;
     eval_exp4(result);
     while ((op = *token) == '*' || op == '/')
@@ -165,7 +164,7 @@ void parser::eval_exp4(double &result)
 // Evaluate a unary + or -.
 void parser::eval_exp5(double &result)
 {
-    register char op;
+    char op;
     op = 0;
     if ((tok_type == DELIMITER) && *token == '+' || *token == '-')
     {
@@ -255,7 +254,7 @@ void parser::eval_exp6(double &result)
 // Obtain the next token.
 void parser::get_token()
 {
-    register char *temp;
+    char *temp;
     tok_type = 0;
     temp = token;
     *temp = '\0';

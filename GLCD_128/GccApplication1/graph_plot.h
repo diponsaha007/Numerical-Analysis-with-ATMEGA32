@@ -1,4 +1,3 @@
-#include <assert.h>
 void show_and_get(char *F, char * s)
 {
 	LCD_Clear();
@@ -81,26 +80,21 @@ void show_and_get(char *F, char * s)
 
 void graph_plot()
 {
-	char F1[]="F(x) = ";
-	char s1[15];
+	char F1[10]="F(x) = ";
+	char s1[10];
 	show_and_get(F1,s1);
 	
-	char F2[]="minX = ";
+	strcpy(F1,"minX = ");
 	char s2[10];
-	show_and_get(F2,s2);
+	show_and_get(F1,s2);
+	double l=ob.eval_exp(s2);
 	
-	char F3[]="maxX = ";
-	char s3[10];
-	show_and_get(F3,s3);
-	
+	strcpy(F1,"maxX = ");
+	show_and_get(F1,s2);
+	double r=ob.eval_exp(s2);
 	
 	const int T=25;
-	
-	parser ob;
-	double l=ob.eval_exp(s2);
-	double r=ob.eval_exp(s3);
-	
-	
+
 	if(l>r)
 	{
 		double t=r;
