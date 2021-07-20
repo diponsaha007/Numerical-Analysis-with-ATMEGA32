@@ -21,7 +21,7 @@ double evaluate_function(char str[], double a)
 	int idx = 0;
 	for(int i=0;str[i]!=0;i++)
 	{
-		if(str[i]=='x')
+		if(str[i]=='x' && (i-1<0 || s[i-1]!='e' ))
 		{
 			dtostrf(a,1,8,tmp);
 			for(int j=0;tmp[j]!=0;j++)
@@ -54,7 +54,7 @@ int int_number_input(int pos)
 			{
 				if(PINB&(1<<r))
 				{
-					if(mat[r][c-4]>='1' && mat[r][c-4]<='7')
+					if(mat[r][c-4]>='1' && mat[r][c-4]<='3')
 					{
 						char tmp[2];
 						tmp[0] = mat[r][c-4];

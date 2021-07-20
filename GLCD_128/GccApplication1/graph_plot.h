@@ -81,11 +81,11 @@ void show_and_get(char *F, char * s)
 void graph_plot()
 {
 	char F1[]="F(x) = ";
-	char s1[10];
+	char s1[20];
 	show_and_get(F1,s1);
 	
 	strcpy(F1,"minX = ");
-	char s2[10];
+	char s2[20];
 	show_and_get(F1,s2);
 	double l=ob.eval_exp(s2);
 	
@@ -93,7 +93,7 @@ void graph_plot()
 	show_and_get(F1,s2);
 	double r=ob.eval_exp(s2);
 	
-	const int T=12;
+	const int T=16;
 
 	if(l>r)
 	{

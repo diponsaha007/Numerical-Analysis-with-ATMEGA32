@@ -15,9 +15,9 @@ double simpson_integration(char str[] , double a, double b){
 void simpson()
 {
 	LCD_Clear();
-	char text1[] = "Input Function of x:";
-	char text2[] = "Input lower limit:";
-	char text3[] = "Input upper limit:";
+	char text1[] = "Input F(x):";
+	char text2[] = "Lower limit:";
+	char text3[] = "Upper limit:";
 	DisplayText(1,1,text1);
 	//input function
 	char s[21];
@@ -99,11 +99,11 @@ void simpson()
 	}
 	LCD_Clear();
 	double l , r;
-	DisplayText(1,1,text2);
-	l = double_num_input(12);
-	LCD_Clear();
-	DisplayText(1,1,text3);
-	r = double_num_input(12);
+	char s1[20];
+	show_and_get(text2 , s1);
+	l = ob.eval_exp(s1);
+	show_and_get(text3 , s1);
+	r = ob.eval_exp(s1);
 	double ans = simpson_integration(s,l,r);
 	
 	//printing ans
@@ -111,33 +111,5 @@ void simpson()
 	show_text(text,1);
 	dtostrf(ans,1,2,s);
 	show_text(s,12);
-	//wait for equal
-	bool done = 0;
-	while (1)
-	{
-		for(int c=4;c<8;c++)
-		{
-			PORTB=1<<c;
-			for(int r=0;r<4;r++)
-			{
-				if(PINB&(1<<r))
-				{
-					if(mat[r][c-4]=='=')
-					{
-						done = 1;
-						break;
-					}
-				}
-			}
-			if(done)
-			{
-				break;
-			}
-		}
-		if(done)
-		{
-			break;
-		}
-	}
 	_delay_ms(500);
 }

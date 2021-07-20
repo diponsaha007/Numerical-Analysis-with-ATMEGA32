@@ -23,8 +23,8 @@ main.d main.o: .././main.cpp \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stdarg.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\stdlib.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\ctype.h \
- .././extras.h .././Gauss.h .././Simpson.h .././graph_plot.h \
- .././Newton.h .././calculator.h
+ .././extras.h .././graph_plot.h .././Newton.h .././calculator.h \
+ .././Simpson.h .././Gauss.h
 
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\io.h:
 
@@ -76,12 +76,12 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\
 
 .././extras.h:
 
-.././Gauss.h:
-
-.././Simpson.h:
-
 .././graph_plot.h:
 
 .././Newton.h:
 
 .././calculator.h:
+
+.././Simpson.h:
+
+.././Gauss.h:

@@ -60,16 +60,16 @@ int gauss_algo (int n, int m)
 }
 void gauss()
 {
-	char text1[] = "Number of Variables (1-7)?";
+	char text1[] = "# Variables?";
 	show_text(text1,1);
-	int m = int_number_input(24);
-	strcpy(text1,"Number of equations (1-7)?");
+	int m = int_number_input(12);
+	strcpy(text1,"# equations?");
 	show_text(text1,1);
-	int n = int_number_input(24);
+	int n = int_number_input(12);
 	
 
 	
-	
+	char s1[20];
 	for(int i=0;i<n;i++)
 	{
 		for(int j=0;j<m;j++)
@@ -87,8 +87,8 @@ void gauss()
 			strcat(text , ek);
 			ek[0] = ']';
 			strcat(text , ek);
-			show_text(text,1);
-			a[i][j] = double_num_input(12);
+			show_and_get(text , s1);
+			a[i][j] = ob.eval_exp(s1);
 		}
 		{
 			char text[18] = "Input column d[";
@@ -98,8 +98,8 @@ void gauss()
 			strcat(text , ek);
 			ek[0] = ']';
 			strcat(text , ek);
-			show_text(text,1);
-			a[i][m] = double_num_input(12);
+			show_and_get(text , s1);
+			a[i][m] = ob.eval_exp(s1);
 		}
 	}
 	int koto = gauss_algo(n,m);
@@ -133,32 +133,34 @@ void gauss()
 		
 		dtostrf(ans[i],1,2,s);
 		show_text(s,12);
-		//wait for equal
-		bool done = 0;
-		while (1)
-		{
-			for(int c=4;c<8;c++)
+		if(i!=m-1){
+			//wait for equal
+			bool done = 0;
+			while (1)
 			{
-				PORTB=1<<c;
-				for(int r=0;r<4;r++)
+				for(int c=4;c<8;c++)
 				{
-					if(PINB&(1<<r))
+					PORTB=1<<c;
+					for(int r=0;r<4;r++)
 					{
-						if(mat[r][c-4]=='=')
+						if(PINB&(1<<r))
 						{
-							done = 1;
-							break;
+							if(mat[r][c-4]=='=')
+							{
+								done = 1;
+								break;
+							}
 						}
+					}
+					if(done)
+					{
+						break;
 					}
 				}
 				if(done)
 				{
 					break;
 				}
-			}
-			if(done)
-			{
-				break;
 			}
 		}
 		_delay_ms(500);

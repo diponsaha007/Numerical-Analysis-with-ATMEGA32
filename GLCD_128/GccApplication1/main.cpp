@@ -5,12 +5,11 @@
 #include "glcd.h"
 #include "parse.h"
 #include "extras.h"
-#include "Gauss.h"
-#include "Simpson.h"
 #include "graph_plot.h"
 #include "Newton.h"
 #include "calculator.h"
-
+#include "Simpson.h"
+#include "Gauss.h"
 void initial_page()
 {
 	DisplayText(1,1,"1.Calculator");

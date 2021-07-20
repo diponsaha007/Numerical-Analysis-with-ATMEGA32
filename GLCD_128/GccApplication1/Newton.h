@@ -1,13 +1,13 @@
 double diffentiation(char str[],double x)
 {
-	double h = 1e-6;
+	double h = 1e-5;
 	return (evaluate_function(str , x+h)-evaluate_function(str, x-h))/(2.00*h);
 }
 
 double newton(char str[],double guess)
 {
 	double x = guess;
-	for (int rep = 0; rep<=40; rep++)
+	for (int rep = 0; rep<=80; rep++)
 	{
 		double nx = x - (evaluate_function(str, x)/diffentiation(str , x));
 		if(!isfinite(nx))
@@ -16,13 +16,14 @@ double newton(char str[],double guess)
 		}
 		x = nx;
 	}
+	
 	return x;
 }
 void newton_raphson()
 {
 	LCD_Clear();
-	char text1[] = "Input Equation of x:";
-	char text2[] = "Input initial approximation:";
+	char text1[] = "Input F(x):";
+	char text2[] = "Initial approx:";
 	DisplayText(1,1,text1);
 	//input function
 	char s[20];
@@ -102,11 +103,10 @@ void newton_raphson()
 		if(done)
 		break;
 	}
-	LCD_Clear();
 	double l;
-	show_text(text2,1);
-	l = double_num_input(24);
-	LCD_Clear();
+	char s1[20];
+	show_and_get(text2 , s1);
+	l = ob.eval_exp(s1);
 	double ans = newton(s,l);
 	
 	//printing ans
@@ -114,33 +114,5 @@ void newton_raphson()
 	show_text(text,1);
 	dtostrf(ans,1,2,s);
 	show_text(s,12);
-	//wait for equal
-	bool done = 0;
-	while (1)
-	{
-		for(int c=4;c<8;c++)
-		{
-			PORTB=1<<c;
-			for(int r=0;r<4;r++)
-			{
-				if(PINB&(1<<r))
-				{
-					if(mat[r][c-4]=='=')
-					{
-						done = 1;
-						break;
-					}
-				}
-			}
-			if(done)
-			{
-				break;
-			}
-		}
-		if(done)
-		{
-			break;
-		}
-	}
 	_delay_ms(500);
 }

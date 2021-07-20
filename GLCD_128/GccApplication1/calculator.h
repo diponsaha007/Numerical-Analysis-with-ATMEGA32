@@ -26,12 +26,14 @@ void calculator()
 						if(mat[r][c-4]=='=')
 						{
 							double ans=ob.eval_exp(s);
-							_delay_ms(100);
-							dtostrf(ans,1,2,s);
-							_delay_ms(100);
-							LCD_Clear();
-							_delay_ms(100);
-							DisplayText(1,1,s);
+							 if (*ob.errormsg)							 {								 DisplayText(1,1,"Error!");								 _delay_ms(400);							 }							 else							 {
+								 _delay_ms(100);
+								 dtostrf(ans,1,2,s);
+								 _delay_ms(100);
+								 LCD_Clear();
+								 _delay_ms(100);
+								 DisplayText(1,1,s);
+							 }
 							return;
 						}
 						s[len]=mat[r][c-4];
