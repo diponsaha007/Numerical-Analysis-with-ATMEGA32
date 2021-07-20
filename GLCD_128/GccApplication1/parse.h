@@ -1,32 +1,3 @@
-/******************************************************************
-
-Introduction:
-mathparser is a simple c++ program to parse math expressions.
-
-The program is a modified version of math expression parser
-presented in the book : "C++ The Complete Reference" by H.Schildt.
-
-It supports operators: + - * / ^ ( )
-
-It supports math functions : SIN, COS, TAN, ASIN, ACOS, ATAN, SINH,
-COSH, TANH, ASINH, ACOSH, ATANH, LN, LOG, EXP, SQRT, SQR, ROUND, INT.
-
-It supports variables A to Z.
-
-Sample:
-25 * 3 + 1.5*(-2 ^ 4 * log(30) / 3)
-x = 3
-y = 4
-r = sqrt(x ^ 2 + y ^ 2)
-t = atan(y / x)
-
-mathparser version 1.0 by Hamid Soltani. (gmail: hsoltanim)
-Last modified: Aug. 2016.
-
-*******************************************************************/
-
-//#include <stdafx.h>
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <ctype.h>
@@ -71,12 +42,12 @@ double parser::eval_exp(char *exp)
     get_token();
     if (!*token)
     {
-        strcpy(errormsg, "No Expression Present"); // no expression present
+        strcpy(errormsg, "Error"); // no expression present
         return (double)0;
     }
     eval_exp1(result);
     if (*token) // last token must be null
-        strcpy(errormsg, "Syntax Error");
+        strcpy(errormsg, "Error");
     return result;
 }
 // Process an assignment.
@@ -190,7 +161,7 @@ void parser::eval_exp6(double &result)
         get_token();
         eval_exp2(result);
         if (*token != ')')
-            strcpy(errormsg, "Unbalanced Parentheses");
+            strcpy(errormsg, "Error");
         if (isfunc)
         {
             if (!strcmp(temp_token, "SIN"))
@@ -203,7 +174,7 @@ void parser::eval_exp6(double &result)
                 result = asin(result);
             else if (!strcmp(temp_token, "ACOS"))
                 result = acos(result);
-            else if (!strcmp(temp_token, "ATAN"))
+            /*else if (!strcmp(temp_token, "ATAN"))
                 result = atan(result);
             else if (!strcmp(temp_token, "SINH"))
                 result = sinh(result);
@@ -216,7 +187,7 @@ void parser::eval_exp6(double &result)
             else if (!strcmp(temp_token, "ACOSH"))
                 result = acos(result);
             else if (!strcmp(temp_token, "ATANH"))
-                result = atan(result);
+                result = atan(result);*/
             else if (!strcmp(temp_token, "LN"))
                 result = log(result);
             else if (!strcmp(temp_token, "LOG"))
@@ -227,12 +198,12 @@ void parser::eval_exp6(double &result)
                 result = sqrt(result);
             else if (!strcmp(temp_token, "SQR"))
                 result = result*result;
-            else if (!strcmp(temp_token, "ROUND"))
+            /*else if (!strcmp(temp_token, "ROUND"))
                 result = round(result);
             else if (!strcmp(temp_token, "INT"))
-                result = floor(result);
+                result = floor(result);*/
             else
-                strcpy(errormsg, "Unknown Function");
+                strcpy(errormsg, "Error");
         }
         get_token();
     }
@@ -248,7 +219,7 @@ void parser::eval_exp6(double &result)
             get_token();
             return;
         default:
-            strcpy(errormsg, "Syntax Error");
+            strcpy(errormsg, "Error");
         }
 }
 // Obtain the next token.
@@ -283,5 +254,5 @@ void parser::get_token()
     }
     *temp = '\0';
     if ((tok_type == VARIABLE) && (token[1]))
-        strcpy(errormsg, "Only first letter of variables is considered");
+        strcpy(errormsg, "Error");
 }
