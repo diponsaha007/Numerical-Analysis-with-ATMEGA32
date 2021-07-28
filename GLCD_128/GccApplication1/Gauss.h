@@ -107,6 +107,7 @@ void gauss()
 	{
 		strcpy(text1,"No Solution!");
 		show_text(text1,1);
+		_delay_ms(1500);
 		return;
 	}
 	else if(koto==1)

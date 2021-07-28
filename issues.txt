@@ -1,4 +1,0 @@
-1. Multiline input
-2. error message
-3. -0
-4. gauss return after extra equal
